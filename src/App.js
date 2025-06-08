@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import Calendar from './pages/Calendar';
+import Charts from './pages/Charts';
+import Kanban from './pages/Kanban';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <Router>
+        <div className="flex">
+          <Sidebar />
+          <div className="flex-1">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/charts" element={<Charts />} />
+              <Route path="/kanban" element={<Kanban />} />
+            </Routes>
+          </div>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
